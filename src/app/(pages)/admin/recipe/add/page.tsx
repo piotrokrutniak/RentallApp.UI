@@ -14,7 +14,11 @@ import { start } from 'repl';
 import FormPopup from '@/app/components/generic/formPopup';
 import Router from 'next/router';
 import Link from 'next/link';
+<<<<<<< HEAD
 import { FileOrUndefined, Recipe, RecipeSection } from '@/app/types';
+=======
+import { FileOrUndefined, Recipe } from '@/app/types';
+>>>>>>> 12bad34 (Initial commit)
 import ImageUploadPopUp from '@/app/components/popUps/ImageUploadPopUp/imageUploadPopUp';
 import { GetRecipe, PostRecipe, UploadImage } from '@/app/integration/cloudinary/recipeMethods';
 import { Url } from 'url';
@@ -24,8 +28,11 @@ import AddIngredientPopup from './components/addIngredientPopup';
 import Switch from '@/app/components/generic/switch';
 import SchedulePopup from '../../../../components/popUps/schedulePopUp/schedulePopup';
 import { GetDate } from '@/app/integration/globalMethods';
+<<<<<<< HEAD
 import Tiptap from '@/app/components/external/TextEditor/tipTap';
 import PostRecipeSections from '@/app/integration/cloudinary/recipeSections/postRecipeSections';
+=======
+>>>>>>> 12bad34 (Initial commit)
 
 export default function RecipePage(){
     const [isSaved, setSaved] = useState(false)
@@ -36,6 +43,11 @@ export default function RecipePage(){
     const [formValidated, setFormValidated] = useState(false)
     const [thumbnail, setThumbnail] = useState<FileOrUndefined>(undefined)
     const [fileToUpload, setFileToUpload] = useState<FileOrUndefined>()
+<<<<<<< HEAD
+=======
+    const [published, setPublished] = useState<boolean>(false)
+    const [publishedDate, setPublishedDate] = useState<string>(GetDate())
+>>>>>>> 12bad34 (Initial commit)
 
     const fileInput = useRef<HTMLInputElement | null>(null)
 
@@ -54,6 +66,7 @@ export default function RecipePage(){
         publishedDate: GetDate()
     })
 
+<<<<<<< HEAD
     const [recipeSections, setRecipeSections] = useState<RecipeSection[]>([
         {
             recipeId: "",
@@ -69,6 +82,8 @@ export default function RecipePage(){
         },
     ])
 
+=======
+>>>>>>> 12bad34 (Initial commit)
     function UpdateTitle(value: string){
         setRecipeData({...recipeData, title: value})
     }
@@ -175,6 +190,7 @@ export default function RecipePage(){
         setRecipeData({...recipeData, summary: value})
     }
 
+<<<<<<< HEAD
     function UpdateRichText(value: string, index: number){
         let tempSections = recipeSections
 
@@ -183,15 +199,25 @@ export default function RecipePage(){
         setRecipeSections([...tempSections])
     }
 
+=======
+>>>>>>> 12bad34 (Initial commit)
     function ActiveOnSave(value: boolean){
         setRecipeData({...recipeData, active: value})
     }
 
+<<<<<<< HEAD
     async function SaveRecipe(recipeId = "undefined"){
         const validated = ValidateForm()
         console.log(validated)
         console.log(formValidated)
         let createdRecipeId = recipeId
+=======
+    async function SaveRecipe(){
+        const validated = ValidateForm()
+        console.log(validated)
+        console.log(formValidated)
+
+>>>>>>> 12bad34 (Initial commit)
 
         if(!formValidated){
             return
@@ -205,6 +231,7 @@ export default function RecipePage(){
 
         PostRecipe(recipeData)
             .then(res => {
+<<<<<<< HEAD
                 createdRecipeId = res.recipeCreated._id
             })
             .then(() => {
@@ -216,6 +243,12 @@ export default function RecipePage(){
             .then(() => {
                 PostRecipeSections(recipeSections, createdRecipeId)
             })
+=======
+                if(ingredients.length > 0){
+                    PostRecipeIngredients(ingredients, res.recipeCreated._id)
+                }
+            })
+>>>>>>> 12bad34 (Initial commit)
 
         setTimeout(() => setSaved(false), 2000)
     }
@@ -230,7 +263,11 @@ export default function RecipePage(){
             }
 
             {scheduleOpen &&
+<<<<<<< HEAD
             <div className="w-full h-full fixed top-0 left-0 bg-black/50 backdrop-blur-md z-50 text-white flex">
+=======
+            <div className="w-full h-full fixed top-0 left-0 bg-black/50 backdrop-blur-md z-50 text-white">
+>>>>>>> 12bad34 (Initial commit)
                 <SchedulePopup setPopUpOpen={setScheduleOpen} popupOpen={scheduleOpen} date={recipeData.publishedDate} setDate={UpdatePublishDate}/>
             </div>
             }
@@ -258,7 +295,11 @@ export default function RecipePage(){
                                 <p className="place-self-center place-items-center text-white/80 flex gap-2">
                                     Preparation time:
                                     <FormInput className="w-16" inputClassName="w-fit text-center" placeholder="0" validationMessage="Must be a number greater than 0." 
+<<<<<<< HEAD
                                         messageClassName="-bottom-6 -right-16 w-fit whitespace-nowrap"
+=======
+                                        messageClassName="absolute -bottom-6 -right-17 w-fit whitespace-nowrap"
+>>>>>>> 12bad34 (Initial commit)
                                         validationResult={formValidation.preparationTime} onBlur={ValidatePreparationTime} onChange={UpdatePreparationTime}/> 
                                     minutes
                                 </p>
@@ -320,10 +361,14 @@ export default function RecipePage(){
                         </li>
                     </ul>
                     <br/>
+<<<<<<< HEAD
                     {
                     // <TextArea inputClassName="mt-5 h-64"  label="Ingredients Notes" placeholder="Enter short recipe description"/>
                     }
                     <Tiptap defaultValue={recipeSections[0].richText} setValue={UpdateRichText} index={0}/>
+=======
+                    <TextArea inputClassName="mt-5 h-64"  label="Ingredients Notes" placeholder="Enter short recipe description"/>
+>>>>>>> 12bad34 (Initial commit)
                 </p>
 
                 {popupOpen && <AddIngredientPopup setPopUpOpen={setPopupOpen} popupOpen={popupOpen}/>}
@@ -334,8 +379,19 @@ export default function RecipePage(){
                     <BsCardList className="h-7 w-7 place-self-center fill-vermilion-400"/> 
                     Instructions
                 </h2>
+<<<<<<< HEAD
                 <Tiptap defaultValue={recipeSections[1].richText} setValue={UpdateRichText} index={1}/>
+=======
+                <TextArea inputClassName="mt-5 h-96"  label="Detailed Recipe Instructions" placeholder="Enter detailed recipe instructions"/>
+>>>>>>> 12bad34 (Initial commit)
             </section>
         </main>
     )
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 12bad34 (Initial commit)
